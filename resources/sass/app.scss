@@ -253,7 +253,6 @@ svg {
     }
 }
 
-
 @media (max-width: 1199px) {
     .books {
         .row {
@@ -280,7 +279,7 @@ svg {
             .nav-right {
                 display: block;
                 li {
-                    margin-bottom: 1rem !important;
+                    margin-bottom: 0.6rem !important;
                 }
             }
         }
@@ -301,6 +300,29 @@ svg {
             justify-content: flex-start;
             li {
                 margin: 0 !important;
+                a {
+                    div.txt-span {
+                        margin-bottom: 0px !important;
+                        margin-top: 4px !important;
+                    }
+                }
+            }
+
+            .account {
+                margin-top: 1.4rem;
+                button {
+                    margin-top: 5px !important;
+                    i {
+                        margin-bottom: 0.5rem !important;
+                    }
+                    span {
+                        margin-top: 0 !important;
+                    }
+                }
+            }
+
+            .else-acc {
+                margin-top: 1.4rem !important;
             }
         }
         .nav-right-search {
@@ -467,4 +489,10 @@ svg {
 .hover-btn-cart:hover {
     background-color: #333 !important;
     color: #fff !important;
+}
+
+.else-acc {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
 }
