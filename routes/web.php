@@ -90,3 +90,4 @@ Route::get('/customer-service', function () {
 Route::get('/my-account', [UserController::class, 'account'])->name('my.account')->middleware('auth');
 
 Route::get('/my-orders', [OrderController::class, 'myOrders'])->name('user.orders');
+

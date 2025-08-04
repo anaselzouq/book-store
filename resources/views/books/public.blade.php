@@ -15,6 +15,7 @@
     <!-- Cairo font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
+    @livewireStyles
 </head>
 
 <body>
@@ -67,12 +68,12 @@
 
         <!-- Right Actions + Social -->
         <div class="nav-right">
-            @php
-                use App\Models\Cart;
+            {{-- @php
+            use App\Models\Cart;
 
-                $cartCount = Auth::check()
-                    ? Cart::where('user_id', Auth::id())->sum('quantity')
-                    : 0;
+            $cartCount = Auth::check()
+            ? Cart::where('user_id', Auth::id())->sum('quantity')
+            : 0;
             @endphp
 
             <li class="ms-3 position-relative text-center" style="width: 60px;">
@@ -92,7 +93,9 @@
                     </span>
                     <div class="txt-span" style="display: block; margin-top: 5px;">المشتريات</div>
                 </a>
-            </li>
+            </li> --}}
+
+            @livewire('cart-count') {{-- use livewire --}}
 
             @if(Auth::check() && Auth::user()->role === 'admin')
 
@@ -121,19 +124,17 @@
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button style="margin-top: 7px" type="submit" class="btn logout-btn p-0 d-flex flex-column"><i
-                            class="fas fa-sign-out-alt me-2 mb-1"></i><span class="txt-span">خروج</span></button>
+                                class="fas fa-sign-out-alt me-2 mb-1"></i><span class="txt-span">خروج</span></button>
                     </form>
                 </div>
             @else
                 <div class="else-acc" style="margin-top: 0.7rem">
                     <a href="{{ route('login') }}" class="d-flex flex-column"><i class="fas fa-sign-in-alt"></i><span
                             class="txt-span">تسجيل الدخول</span></a>
-                    <a href="{{ route('register') }}" class="d-flex flex-column" style="row-gap: 9px"><i class="fas fa-user-plus"></i><span
-                            class="txt-span">أنشاء حساب</span></a>
+                    <a href="{{ route('register') }}" class="d-flex flex-column" style="row-gap: 9px"><i
+                            class="fas fa-user-plus"></i><span class="txt-span">أنشاء حساب</span></a>
                 </div>
             @endif
-
-
 
         </div>
     </nav>
@@ -744,6 +745,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
+
+    @livewireScripts
 
 </body>
 

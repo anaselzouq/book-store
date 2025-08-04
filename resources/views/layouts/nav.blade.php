@@ -7,7 +7,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
     {{-- Vite + SCSS + FontAwesome --}}
-    @vite(['resources/js/app.js','resources/js/main.js', 'resources/sass/app.scss'])
+    @vite(['resources/js/app.js', 'resources/js/main.js', 'resources/sass/app.scss'])
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
         integrity="sha512-Mu4y+qRmE6cF7c9i9..." crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.rtl.min.css" rel="stylesheet">
@@ -17,6 +17,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <link href='https://cdn.boxicons.com/fonts/basic/boxicons.min.css' rel='stylesheet'>
 
+    @livewireStyles
 </head>
 
 <body>
@@ -33,10 +34,13 @@
                     <h1 class="m-0">بين السطور</h1>
                 </a>
                 <!-- Search -->
-                <form method="GET" class="search-container d-flex align-items-center flex-grow-1 mx-3" action="{{ route('books.search') }}">
+                <form method="GET" class="search-container d-flex align-items-center flex-grow-1 mx-3"
+                    action="{{ route('books.search') }}">
                     <div class="position-relative w-100">
-                        <input type="text" name="q" class="form-control ps-5" placeholder="اسم الرواية ,اسم المؤلف..." value="{{ request('q') }}">
-                        <button type="submit" class="btn p-0 border-0 bg-transparent position-absolute top-50 start-0 translate-middle-y ps-3">
+                        <input type="text" name="q" class="form-control ps-5" placeholder="اسم الرواية ,اسم المؤلف..."
+                            value="{{ request('q') }}">
+                        <button type="submit"
+                            class="btn p-0 border-0 bg-transparent position-absolute top-50 start-0 translate-middle-y ps-3">
                             <i class="fas fa-search text-muted"></i>
                         </button>
                     </div>
@@ -55,15 +59,18 @@
             <a href="/#shop">الفئات</a>
             <a href="/#contact">للتواصل</a>
             <div class="social d-flex align-items-center">
-                <a href="https://www.facebook.com/profile.php?id=100088795863299" target="_blank" class="not me-3"><i class="fab fa-facebook-f"></i></a>
-                <a href="https://www.instagram.com/bookaboo.store/" target="_blank" class="not me-3"><i class="fab fa-instagram"></i></a>
-                <a href="https://api.whatsapp.com/send/?phone=201234567890&text&type=phone_number&app_absent=0" target="_blank" class="not" class="me-2"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=100088795863299" target="_blank" class="not me-3"><i
+                        class="fab fa-facebook-f"></i></a>
+                <a href="https://www.instagram.com/bookaboo.store/" target="_blank" class="not me-3"><i
+                        class="fab fa-instagram"></i></a>
+                <a href="https://api.whatsapp.com/send/?phone=201234567890&text&type=phone_number&app_absent=0"
+                    target="_blank" class="not" class="me-2"><i class="fa-brands fa-whatsapp"></i></a>
             </div>
         </div>
 
         <!-- Right Actions + Social -->
-         <div class="nav-right">
-            @php
+        <div class="nav-right">
+            {{-- @php
                 use App\Models\Cart;
 
                 $cartCount = Auth::check()
@@ -88,7 +95,10 @@
                     </span>
                     <div class="txt-span" style="display: block; margin-top: 5px;">المشتريات</div>
                 </a>
-            </li>
+            </li> --}}
+
+            @livewire('cart-count')
+
 
             @if(Auth::check() && Auth::user()->role === 'admin')
 
@@ -117,15 +127,15 @@
                     <form method="POST" action="{{ route('logout') }}">
                         @csrf
                         <button style="margin-top: 7px" type="submit" class="btn logout-btn p-0 d-flex flex-column"><i
-                            class="fas fa-sign-out-alt me-2 mb-1"></i><span class="txt-span">خروج</span></button>
+                                class="fas fa-sign-out-alt me-2 mb-1"></i><span class="txt-span">خروج</span></button>
                     </form>
                 </div>
             @else
                 <div class="else-acc" style="margin-top: 0.7rem">
                     <a href="{{ route('login') }}" class="d-flex flex-column"><i class="fas fa-sign-in-alt"></i><span
                             class="txt-span">تسجيل الدخول</span></a>
-                    <a href="{{ route('register') }}" class="d-flex flex-column" style="row-gap: 9px"><i class="fas fa-user-plus"></i><span
-                            class="txt-span">أنشاء حساب</span></a>
+                    <a href="{{ route('register') }}" class="d-flex flex-column" style="row-gap: 9px"><i
+                            class="fas fa-user-plus"></i><span class="txt-span">أنشاء حساب</span></a>
                 </div>
             @endif
 
@@ -136,14 +146,16 @@
 
     @yield('content');
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             let barsIcon = document.querySelector(".bars i");
             let barsContainer = document.querySelector(".main-navbar");
 
-            barsIcon.addEventListener("click", function() {
+            barsIcon.addEventListener("click", function () {
                 barsIcon.classList.toggle("fa-bars");
                 barsIcon.classList.toggle("fa-xmark");
                 barsContainer.classList.toggle("active");
             });
         });
     </script>
+    @livewireScripts
+

@@ -13,23 +13,23 @@ class AuthController extends Controller
         return view('auth.login');
     }
 
-public function login(Request $request)
-{
-    $credentials = $request->only('email', 'password');
-    $remember = true;
+    public function login(Request $request)
+    {
+        $credentials = $request->only('email', 'password');
+        $remember = true;
 
-    if (Auth::attempt($credentials, $remember)) {
-        $request->session()->regenerate();
+        if (Auth::attempt($credentials, $remember)) {
+            $request->session()->regenerate();
 
-        return Auth::user()->role === 'admin'
-            ? redirect()->route('admin.books')
-            : redirect()->route('books.index');
+            return Auth::user()->role === 'admin'
+                ? redirect()->route('admin.books')
+                : redirect()->route('books.index');
+        }
+
+        return back()->withErrors([
+            'login_error' => 'البريد الإلكتروني أو كلمة المرور غير صحيحة',
+        ])->withInput();
     }
-
-    return back()->withErrors([
-        'login_error' => 'البريد الإلكتروني أو كلمة المرور غير صحيحة',
-    ])->withInput();
-}
 
 
 
