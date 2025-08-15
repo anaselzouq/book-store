@@ -32,17 +32,14 @@
                     <h1 class="m-0">بين السطور</h1>
                 </a>
                 <!-- Search -->
-                <form method="GET" class="search-container d-flex align-items-center flex-grow-1 mx-3"
-                    action="{{ route('books.search') }}">
-                    <div class="position-relative w-100">
-                        <input type="text" name="q" class="form-control ps-5" placeholder="اسم الرواية ,اسم المؤلف..."
-                            value="{{ request('q') }}">
-                        <button type="submit"
-                            class="btn p-0 border-0 bg-transparent position-absolute top-50 start-0 translate-middle-y ps-3">
-                            <i class="fas fa-search text-muted"></i>
-                        </button>
-                    </div>
-                </form>
+                @livewire('book-search')
+                <div>
+                    @if(session('not_found'))
+                        <div id="notfoundmessage" class="alert alert-warning text-center mt-3">
+                            {{ session('not_found') }}
+                        </div>
+                    @endif
+                </div>
             </div>
 
             <div class="bars">
@@ -138,6 +135,8 @@
 
         </div>
     </nav>
+
+    
     <!-- Hero Section Slider -->
     <section class="hero-section mb-5 position-relative text-center text-white d-flex align-items-center"
         style="flex-direction: column;justify-content: center;">
@@ -150,20 +149,8 @@
 
         <div class="container position-relative z-1">
             <h1 class="mb-4 display-4 fw-bold">أشهر الروايات العربية بين يديك</h1>
-            <form method="GET" class="d-flex justify-content-center mb-4" action="{{ route('books.search') }}">
-                <div class="input-group w-100 w-md-75 w-lg-50">
-                    <input type="text" name="q" class="form-control form-control-lg"
-                        placeholder="ابحث عن الرواية أو المؤلف..." value="{{ request('q') }}">
-                    <button class="btn btn-warning btn-lg" type="submit"><i class="fas fa-search"></i> بحث</button>
-                </div>
-            </form>
-        </div>
-        <div>
-            @if(session('not_found'))
-                <div class="alert alert-warning text-center mt-3">
-                    {{ session('not_found') }}
-                </div>
-            @endif
+            @livewire('book-search-hero')
+
         </div>
     </section>
 

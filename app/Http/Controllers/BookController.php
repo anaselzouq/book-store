@@ -196,24 +196,23 @@ class BookController extends Controller
     }
 
     public function search(Request $request)
-{
-    $query = $request->input('q');
+    {
+        $query = $request->input('q');
 
-    if (!$query || trim($query) == '') {
-        return redirect('/')->with('not_found', 'يرجى إدخال كلمة للبحث.');
+        if (!$query || trim($query) == '') {
+            return redirect('/')->with('not_found', 'يرجى إدخال كلمة للبحث.');
+        }
+
+        $query = mb_strtolower($query);
+
+        $books = Book::whereRaw('LOWER(title) LIKE ?', ["%$query%"])
+            ->orWhereRaw('LOWER(author) LIKE ?', ["%$query%"])
+            ->get();
+
+        if ($books->isEmpty()) {
+            return redirect('/')->with('not_found', 'الكتاب غير متوفر حالياً.');
+        }
+
+        return view('books.search_results', compact('books', 'query'));
     }
-
-    $query = mb_strtolower($query);
-
-    $books = Book::whereRaw('LOWER(title) LIKE ?', ["%$query%"])
-                ->orWhereRaw('LOWER(author) LIKE ?', ["%$query%"])
-                ->get();
-
-    if ($books->isEmpty()) {
-        return redirect('/')->with('not_found', 'الكتاب غير متوفر حالياً.');
-    }
-
-    return view('books.search_results', compact('books', 'query'));
-}
-
 }

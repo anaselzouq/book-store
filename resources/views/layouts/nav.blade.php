@@ -34,7 +34,7 @@
                     <h1 class="m-0">بين السطور</h1>
                 </a>
                 <!-- Search -->
-                <form method="GET" class="search-container d-flex align-items-center flex-grow-1 mx-3"
+                {{-- <form method="GET" class="search-container d-flex align-items-center flex-grow-1 mx-3"
                     action="{{ route('books.search') }}">
                     <div class="position-relative w-100">
                         <input type="text" name="q" class="form-control ps-5" placeholder="اسم الرواية ,اسم المؤلف..."
@@ -44,7 +44,8 @@
                             <i class="fas fa-search text-muted"></i>
                         </button>
                     </div>
-                </form>
+                </form> --}}
+                @livewire('book-search')
             </div>
 
             <div class="bars">

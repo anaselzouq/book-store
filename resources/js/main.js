@@ -62,3 +62,11 @@ window.addToCart = function (bookId, element) {
         }
     }, 5000);
 };
+
+let msgsearch = document.getElementById("notfoundmessage");
+
+setTimeout(() => {
+    if (msgsearch) {
+        msgsearch.style.display = "none";
+    }
+},3000)
